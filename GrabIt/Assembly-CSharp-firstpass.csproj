@@ -182,6 +182,7 @@
      <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
      <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
      <None Include="Assets\Standard Assets\Effects\TessellationShaders\Shaders\BumpedSpecularDisplacement.shader" />
+     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>/Users/elodie/GrabIt/GrabIt/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
