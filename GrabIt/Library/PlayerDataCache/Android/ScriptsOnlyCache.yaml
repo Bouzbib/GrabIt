@@ -5,7 +5,7 @@ ScriptsOnlyBuild:
     - ONSPSettings
     - OvrAvatarSettings
     - ReadHand
-    - SimulationHand
+    - WriteHand
     Oculus.Platform.dll:
     - Oculus.Platform.PlatformSettings
     Oculus.VR.Editor.dll:
@@ -52,6 +52,8 @@ ScriptsOnlyBuild:
     - Class: 43
       Script: {instanceID: 0}
     - Class: 48
+      Script: {instanceID: 0}
+    - Class: 49
       Script: {instanceID: 0}
     - Class: 54
       Script: {instanceID: 0}
@@ -126,7 +128,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13156}
     - Class: 114
-      Script: {instanceID: 13232}
+      Script: {instanceID: 71016}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 135
@@ -1094,12 +1096,6 @@ ScriptsOnlyBuild:
     assemblyName: SteamVR.dll
     namespaceName: Valve.VR.InteractionSystem.Sample
     className: FloppyHand
-  - hash:
-      serializedVersion: 2
-      Hash: cac6eb3ffe5df4c6cfd1e6bcff30f84c
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Collection_Write
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -2566,7 +2562,7 @@ ScriptsOnlyBuild:
     className: DestroyOnDetachedFromHand
   - hash:
       serializedVersion: 2
-      Hash: a5bf96db26a46a99f575d81c1af62365
+      Hash: 7006cf0ce210e2794043cf96dcf047e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ReadHand
@@ -3352,7 +3348,7 @@ ScriptsOnlyBuild:
     className: DebugUISample
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: c264dbad0a2e0102a8878774a21f9d4d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SimulationHand
@@ -3392,6 +3388,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Utility
     className: AutoMobileShaderSwitch
+  - hash:
+      serializedVersion: 2
+      Hash: 7255813cab5b65b378484cd930a56e9f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: WriteHand
   platform: 13
   scenePathNames:
   - Assets/Scenes/DataCollection.unity

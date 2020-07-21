@@ -43,7 +43,7 @@ public class ColorChange : MonoBehaviour
 		// colors = new Color[thisVertices.Length];
 		// closestPointPerVertex = new Vector3[thisVertices.Length];
     	
-    	for(int j = 0; j < rightHand.GetComponentsInChildren<Collider>().Length; j++)
+    	for(int j = 0; j < leftHand.GetComponentsInChildren<Collider>().Length; j++)
     	{
     		handCollidersRight = rightHand.GetComponentsInChildren<Collider>()[j];
     		handCollidersLeft = leftHand.GetComponentsInChildren<Collider>()[j];
@@ -91,19 +91,22 @@ public class ColorChange : MonoBehaviour
   //   public void OnDrawGizmos()
   //   {
 
-  //   	for(int j = 0; j < hand.GetComponentsInChildren<Collider>().Length; j++)
+  //   	for(int j = 0; j < rightHand.GetComponentsInChildren<Collider>().Length; j++)
   //   	{
-		// 	handColliders = hand.GetComponentsInChildren<Collider>()[j];
+		// 	handCollidersRight = rightHand.GetComponentsInChildren<Collider>()[j];
+		// 	handCollidersLeft = leftHand.GetComponentsInChildren<Collider>()[j];
   //   	}
 
   //       for(int i = 0; i < thisVertices.Length; i++)
   //       {
   //       	worldVertex = transform.TransformPoint(thisVertices[i]);
-	 //        closestPointPerVertex[i] = handColliders.ClosestPoint(worldVertex);
+	 //        closestPointPerVertexRight[i] = handCollidersRight.ClosestPoint(worldVertex);
+		// 	closestPointPerVertexLeft[i] = handCollidersLeft.ClosestPoint(worldVertex);
 
   //       	// Gizmos.DrawSphere(worldVertex, 0.1f);
 	 //        // Gizmos.DrawWireSphere(closestPointPerVertex[i], 0.05f);
-		// 	Debug.DrawRay(closestPointPerVertex[i], (worldVertex - closestPointPerVertex[i]), Color.blue);
+		// 	Debug.DrawRay(closestPointPerVertexRight[i], (worldVertex - closestPointPerVertexRight[i]), Color.blue);
+		// 	Debug.DrawRay(closestPointPerVertexLeft[i], (worldVertex - closestPointPerVertexLeft[i]), Color.red);
 
 		// }
   //   }
