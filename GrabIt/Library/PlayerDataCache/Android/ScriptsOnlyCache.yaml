@@ -4,7 +4,6 @@ ScriptsOnlyBuild:
     - ColorChange
     - ONSPSettings
     - OvrAvatarSettings
-    - ReadHand
     - WriteHand
     Oculus.Platform.dll:
     - Oculus.Platform.PlatformSettings
@@ -86,6 +85,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10080}
     - Class: 114
+      Script: {instanceID: 10290}
+    - Class: 114
       Script: {instanceID: 10394}
     - Class: 114
       Script: {instanceID: 10590}
@@ -112,8 +113,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11848}
     - Class: 114
-      Script: {instanceID: 12002}
-    - Class: 114
       Script: {instanceID: 12234}
     - Class: 114
       Script: {instanceID: 12554}
@@ -127,8 +126,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13040}
     - Class: 114
       Script: {instanceID: 13156}
-    - Class: 114
-      Script: {instanceID: 71016}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 135
@@ -1018,6 +1015,12 @@ ScriptsOnlyBuild:
     assemblyName: SteamVR.dll
     namespaceName: Valve.VR.InteractionSystem.Sample
     className: JoeJeffController
+  - hash:
+      serializedVersion: 2
+      Hash: 7255813cab5b65b378484cd930a56e9f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: WriteHand
   - hash:
       serializedVersion: 2
       Hash: e540a01426f9ad59088593bf72bcd255
@@ -3388,12 +3391,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Utility
     className: AutoMobileShaderSwitch
-  - hash:
-      serializedVersion: 2
-      Hash: 7255813cab5b65b378484cd930a56e9f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: WriteHand
   platform: 13
   scenePathNames:
   - Assets/Scenes/DataCollection.unity

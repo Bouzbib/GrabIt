@@ -29,7 +29,6 @@ public class ColorChange : MonoBehaviour
 
     void Update()
     {
-
 		// for(int i = 0; i < this.GetComponentsInChildren<Collider>().Length; i++)
 		// {
 		// 	this.GetComponentsInChildren<MeshRenderer>()[i].material.shader = shader;
@@ -42,12 +41,11 @@ public class ColorChange : MonoBehaviour
 		
 		// colors = new Color[thisVertices.Length];
 		// closestPointPerVertex = new Vector3[thisVertices.Length];
-    	
+
     	for(int j = 0; j < leftHand.GetComponentsInChildren<Collider>().Length; j++)
     	{
     		handCollidersRight = rightHand.GetComponentsInChildren<Collider>()[j];
     		handCollidersLeft = leftHand.GetComponentsInChildren<Collider>()[j];
-			// print(handColliders);
     	}
 
         for(int k = 0; k < thisVertices.Length; k++)
