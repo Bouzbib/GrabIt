@@ -21,7 +21,7 @@ public class SimulationHand : MonoBehaviour
 
     private float frame_max;
 
-    private int etat;
+    public int etat = 0;
     private int boneId;
 
     private StreamReader sr, srCollProp, srCollPos, srNames;

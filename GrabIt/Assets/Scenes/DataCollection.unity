@@ -135,6 +135,8 @@ GameObject:
   - component: {fileID: 24676571}
   - component: {fileID: 24676574}
   - component: {fileID: 24676572}
+  - component: {fileID: 24676573}
+  - component: {fileID: 24676575}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -245,6 +247,24 @@ MonoBehaviour:
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
   m_grabPoints: []
+--- !u!114 &24676573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24676566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d1a7708e76601b4ea829921c33bc624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_allowOffhandGrab: 1
+  m_snapPosition: 0
+  m_snapOrientation: 0
+  m_snapOffset: {fileID: 0}
+  m_grabPoints: []
+  m_materialColorField: 
 --- !u!54 &24676574
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -260,7 +280,27 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
+--- !u!114 &24676575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24676566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb178d948e75c49c5bba8df17e0e3006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 0
+  forcedWeight: 0
+  ANGLE_MIN: 0
+  REAL_MIN_DISTANCE: 0
+  dot_angle: 0
+  toBePicked: 0
+  collision: 0
+  handsUser: {fileID: 0}
 --- !u!1001 &33011464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -668,7 +708,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &607427802
 GameObject:
@@ -701,6 +741,7 @@ Transform:
   - {fileID: 24676567}
   - {fileID: 1924830836}
   - {fileID: 1355889603}
+  - {fileID: 1218167903}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -948,6 +989,7 @@ GameObject:
   m_Component:
   - component: {fileID: 821001517}
   - component: {fileID: 821001516}
+  - component: {fileID: 821001518}
   m_Layer: 0
   m_Name: WriteObject
   m_TagString: Untagged
@@ -981,8 +1023,20 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &821001518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821001515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5931e40073f14941a95ade48a935c81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &840817960 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 487254, guid: 126d619cf4daa52469682f85c1378b4a,
@@ -1188,6 +1242,8 @@ GameObject:
   - component: {fileID: 1218167900}
   - component: {fileID: 1218167899}
   - component: {fileID: 1218167905}
+  - component: {fileID: 1218167904}
+  - component: {fileID: 1218167906}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -1275,13 +1331,31 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218167898}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.07, y: -0.2, z: 0.533}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.30041778, y: 0.853, z: 0.333}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 607427803}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1218167904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218167898}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_allowOffhandGrab: 1
+  m_snapPosition: 0
+  m_snapOrientation: 0
+  m_snapOffset: {fileID: 0}
+  m_grabPoints:
+  - {fileID: 1218167900}
 --- !u!54 &1218167905
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1298,6 +1372,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1218167906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218167898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb178d948e75c49c5bba8df17e0e3006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 0
+  forcedWeight: 0
+  ANGLE_MIN: 0
+  REAL_MIN_DISTANCE: 0
+  dot_angle: 0
+  toBePicked: 0
+  collision: 0
+  handsUser: {fileID: 0}
 --- !u!1001 &1235778301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1809,6 +1903,7 @@ GameObject:
   - component: {fileID: 1355889606}
   - component: {fileID: 1355889605}
   - component: {fileID: 1355889604}
+  - component: {fileID: 1355889610}
   m_Layer: 0
   m_Name: Sphere (1)
   m_TagString: Untagged
@@ -1936,6 +2031,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1355889602}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1355889610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355889602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb178d948e75c49c5bba8df17e0e3006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 0
+  forcedWeight: 0
+  ANGLE_MIN: 0
+  REAL_MIN_DISTANCE: 0
+  dot_angle: 0
+  toBePicked: 0
+  collision: 0
+  handsUser: {fileID: 0}
 --- !u!1 &1357725086 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 126d619cf4daa52469682f85c1378b4a,
@@ -1972,6 +2087,8 @@ GameObject:
   - component: {fileID: 1369845068}
   - component: {fileID: 1369845073}
   - component: {fileID: 1369845074}
+  - component: {fileID: 1369845075}
+  - component: {fileID: 1369845076}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -2098,7 +2215,45 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
+--- !u!114 &1369845075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369845067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d1a7708e76601b4ea829921c33bc624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_allowOffhandGrab: 1
+  m_snapPosition: 0
+  m_snapOrientation: 0
+  m_snapOffset: {fileID: 0}
+  m_grabPoints: []
+  m_materialColorField: 
+--- !u!114 &1369845076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369845067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb178d948e75c49c5bba8df17e0e3006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 0
+  forcedWeight: 0
+  ANGLE_MIN: 0
+  REAL_MIN_DISTANCE: 0
+  dot_angle: 0
+  toBePicked: 0
+  collision: 0
+  handsUser: {fileID: 0}
 --- !u!1 &1377724055 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1732268206786806, guid: c6a74181d4000004887343fb87b3c53a,
@@ -2980,7 +3135,7 @@ Transform:
   - {fileID: 1873006118}
   - {fileID: 1330661993}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1893651194
 GameObject:
@@ -3090,6 +3245,7 @@ GameObject:
   - component: {fileID: 1924830840}
   - component: {fileID: 1924830841}
   - component: {fileID: 1924830842}
+  - component: {fileID: 1924830843}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -3198,7 +3354,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &1924830842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3215,7 +3371,28 @@ MonoBehaviour:
   m_snapPosition: 0
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
-  m_grabPoints: []
+  m_grabPoints:
+  - {fileID: 1924830837}
+--- !u!114 &1924830843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924830835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb178d948e75c49c5bba8df17e0e3006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 0
+  forcedWeight: 0
+  ANGLE_MIN: 0
+  REAL_MIN_DISTANCE: 0
+  dot_angle: 0
+  toBePicked: 0
+  collision: 0
+  handsUser: {fileID: 0}
 --- !u!1 &1970047322
 GameObject:
   m_ObjectHideFlags: 0

@@ -625,9 +625,12 @@
      <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
      <Compile Include="Assets\Scripts\ColorChange.cs" />
+     <Compile Include="Assets\Scripts\ObjectOfInterest.cs" />
      <Compile Include="Assets\Scripts\ReadHand.cs" />
      <Compile Include="Assets\Scripts\SimulationHand.cs" />
+     <Compile Include="Assets\Scripts\SimulationObjOfInterest.cs" />
      <Compile Include="Assets\Scripts\WriteHand.cs" />
+     <Compile Include="Assets\Scripts\WriteObjOfInterest.cs" />
      <None Include="Assets\Oculus\SampleFramework\Usage\OVROverlayCanvas\Shaders\UI Prerendered Opaque.shader" />
      <None Include="Assets\OpenCV+Unity\Demo\Face_Detector\haarcascade_frontalface_default.xml" />
      <None Include="Assets\Oculus\Avatar\Resources\Materials\Version1.5\Avatar_PC_SingleComponent.shader" />

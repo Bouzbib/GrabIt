@@ -73,10 +73,7 @@ public class ColorChange : MonoBehaviour
 			{
 				colors[k] = Color.Lerp(Color.white, Color.yellow, (1-distance));
 			}
-			// if(distance < 0.30f  && distance > 0.15f)
-			// {
-			// 	colors[k] = Color.Lerp(Color.yellow, Color.magenta, (1-distance));
-			// }
+
 			if(distance < 0.15f)
 			{
 				colors[k] = Color.Lerp(Color.yellow, Color.red, (1-distance));
@@ -86,6 +83,7 @@ public class ColorChange : MonoBehaviour
 		thisMesh.colors = colors;
     }
 
+// SHOW GIZMOOOOOOOS -> vertex between user's hands and OOI
   //   public void OnDrawGizmos()
   //   {
 
