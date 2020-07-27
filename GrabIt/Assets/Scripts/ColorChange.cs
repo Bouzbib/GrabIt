@@ -24,7 +24,8 @@ public class ColorChange : MonoBehaviour
 		thisVertices = this.GetComponent<MeshFilter>().mesh.vertices;	
 		colors = new Color[thisVertices.Length];
 		closestPointPerVertexRight = new Vector3[thisVertices.Length];	
-		closestPointPerVertexLeft = new Vector3[thisVertices.Length];	
+		closestPointPerVertexLeft = new Vector3[thisVertices.Length];
+			
     }
 
     void Update()

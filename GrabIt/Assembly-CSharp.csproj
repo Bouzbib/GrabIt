@@ -625,6 +625,7 @@
      <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
      <Compile Include="Assets\Scripts\ColorChange.cs" />
+     <Compile Include="Assets\Scripts\InstantiateGameObjects.cs" />
      <Compile Include="Assets\Scripts\ObjectOfInterest.cs" />
      <Compile Include="Assets\Scripts\ReadHand.cs" />
      <Compile Include="Assets\Scripts\SimulationHand.cs" />

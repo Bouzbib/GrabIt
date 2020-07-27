@@ -23,7 +23,7 @@ public class ObjectOfInterest : MonoBehaviour
 
     public float REAL_MIN_DISTANCE, dot_angle;
 
-    private Collider collThis, collUser;
+    private Collider collThis;//, collUser;
 
     public bool toBePicked = false;
     public bool collision = false;
@@ -36,9 +36,9 @@ public class ObjectOfInterest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // user = GameObject.Find("CenterEyeAnchor").transform;
-        user = GameObject.Find("Main Camera").transform;
-        user.gameObject.AddComponent<Collider>();
+        user = GameObject.Find("CenterEyeAnchor").transform;
+        // user = GameObject.Find("Main Camera").transform;
+        // user.gameObject.AddComponent<Collider>();
     
         // handsUser = GameObject.Find("Fingers");
         // palm = GameObject.Find("Palm");
@@ -51,7 +51,7 @@ public class ObjectOfInterest : MonoBehaviour
     {
     	forcedWeight = false;
     	collThis = this.GetComponent<Collider>();
-    	collUser = GameObject.Find("CenterEyeAnchor").GetComponent<Collider>();
+    	// collUser = GameObject.Find("CenterEyeAnchor").GetComponent<Collider>();
 
 // CALCUL DISTANCE ET ANGLE
 
