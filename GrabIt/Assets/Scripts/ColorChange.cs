@@ -5,14 +5,18 @@ using UnityEngine;
 public class ColorChange : MonoBehaviour
 {
 	public GameObject rightHand, leftHand;
-	private float distance, distanceL, distanceR;
+	private float distanceL, distanceR;
+	public float distance;
 	private Mesh thisMesh;
 	private Vector3[] thisVertices, closestPointPerVertexRight, closestPointPerVertexLeft;
 	private Color[] colors;
 	private Vector3 worldVertex;
 
+	public bool graspContact;
+
 	private Collider handCollidersRight, handCollidersLeft;
 	private Shader shader;
+
 
     void Start()
     {
@@ -25,11 +29,13 @@ public class ColorChange : MonoBehaviour
 		colors = new Color[thisVertices.Length];
 		closestPointPerVertexRight = new Vector3[thisVertices.Length];	
 		closestPointPerVertexLeft = new Vector3[thisVertices.Length];
+		graspContact = false;
 			
     }
 
     void Update()
     {
+    	graspContact = false;
 		// for(int i = 0; i < this.GetComponentsInChildren<Collider>().Length; i++)
 		// {
 		// 	this.GetComponentsInChildren<MeshRenderer>()[i].material.shader = shader;
@@ -78,6 +84,11 @@ public class ColorChange : MonoBehaviour
 			if(distance < 0.15f)
 			{
 				colors[k] = Color.Lerp(Color.yellow, Color.red, (1-distance));
+			}
+
+			if(distance < 0.1f)
+			{
+				graspContact = true;
 			}
 
 		}
