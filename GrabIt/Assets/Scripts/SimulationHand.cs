@@ -40,7 +40,9 @@ public class SimulationHand : MonoBehaviour
         rightHandColl = GameObject.Find("RightHandColl");
 
 		string path = "Assets/Resources/DataCollection/" + FileName + ".csv";
-        string pathCollProperty = "Assets/Resources/DataCollection/" + FileName + "-Coll.csv";
+        // string pathCollProperty = "Assets/Resources/DataCollection/" + FileName + "-Coll.csv";
+        string pathCollProperty = "Assets/Resources/DataCollection/propsColliders.csv";
+
         string pathPosOrientColl = "Assets/Resources/DataCollection/" + FileName + "pos-orient.csv";
         string pathCollNames = "Assets/Resources/DataCollection/namesColliders.csv";
 
@@ -57,7 +59,7 @@ public class SimulationHand : MonoBehaviour
             string line = srCollProp.ReadToEnd();     
             dataCollProp = line.Split('\n');
         }
-        collProperties = dataCollProp[2].Split(';');
+        collProperties = dataCollProp[1].Split(';');
 
         StreamReader srCollPos = new StreamReader(pathPosOrientColl, true);
         if (srCollPos.Peek() > -1) 
@@ -65,7 +67,7 @@ public class SimulationHand : MonoBehaviour
             string line = srCollPos.ReadToEnd();     
             dataCollPos = line.Split('\n');
         }
-        collPosOrient = dataCollProp[2].Split(';');
+        collPosOrient = dataCollPos[2].Split(';');
 
         frame_max = (dataSplit.Length - 1);
 
@@ -93,6 +95,20 @@ public class SimulationHand : MonoBehaviour
             rightHandColl.transform.GetChild(i).transform.gameObject.GetComponent<Rigidbody>().useGravity = false;
             leftHandColl.transform.GetChild(i).transform.gameObject.GetComponent<Rigidbody>().mass = 1.0f;
             rightHandColl.transform.GetChild(i).transform.gameObject.GetComponent<Rigidbody>().mass = 1.0f;
+        }
+
+        for(int i = 0; i < (19)*13; i = i+13)
+        {
+            int idProp = int.Parse(collProperties[i]);
+            leftHandColl.transform.GetChild(idProp).transform.gameObject.GetComponent<CapsuleCollider>().center = new Vector3(float.Parse((collProperties[i+1]), CultureInfo.InvariantCulture), float.Parse((collProperties[i+2]), CultureInfo.InvariantCulture), float.Parse((collProperties[i+3]), CultureInfo.InvariantCulture));
+            leftHandColl.transform.GetChild(idProp).transform.gameObject.GetComponent<CapsuleCollider>().radius = float.Parse((collProperties[i+4]), CultureInfo.InvariantCulture);
+            leftHandColl.transform.GetChild(idProp).transform.gameObject.GetComponent<CapsuleCollider>().height = float.Parse((collProperties[i+5]), CultureInfo.InvariantCulture);
+            leftHandColl.transform.GetChild(idProp).transform.gameObject.GetComponent<CapsuleCollider>().direction = int.Parse(collProperties[i+6]);
+
+            rightHandColl.transform.GetChild(idProp).transform.gameObject.GetComponent<CapsuleCollider>().center = new Vector3(float.Parse((collProperties[i+7]), CultureInfo.InvariantCulture), float.Parse((collProperties[i+8]), CultureInfo.InvariantCulture), float.Parse((collProperties[i+9]), CultureInfo.InvariantCulture));
+            rightHandColl.transform.GetChild(idProp).transform.gameObject.GetComponent<CapsuleCollider>().radius = float.Parse((collProperties[i+10]), CultureInfo.InvariantCulture);
+            rightHandColl.transform.GetChild(idProp).transform.gameObject.GetComponent<CapsuleCollider>().height = float.Parse((collProperties[i+11]), CultureInfo.InvariantCulture);
+            rightHandColl.transform.GetChild(idProp).transform.gameObject.GetComponent<CapsuleCollider>().direction = int.Parse(collProperties[i+12]);
         }
         
 	}
@@ -122,7 +138,7 @@ public class SimulationHand : MonoBehaviour
 	                    etat = 1;
 	                }
                	splitSentence = dataSplit[frame].Split(';');
-                collProperties = dataCollProp[frame].Split(';');
+                // collProperties = dataCollProp[frame].Split(';');
                 collPosOrient = dataCollPos[frame].Split(';');
             	
                 posUser.position = new Vector3(float.Parse((splitSentence[1]), CultureInfo.InvariantCulture)/1000, float.Parse((splitSentence[2]), CultureInfo.InvariantCulture)/1000, float.Parse((splitSentence[3]), CultureInfo.InvariantCulture)/1000);
@@ -148,43 +164,16 @@ public class SimulationHand : MonoBehaviour
                     rightHandColl.transform.GetChild(idColl).transform.position = new Vector3(float.Parse((collPosOrient[i+7]), CultureInfo.InvariantCulture), float.Parse((collPosOrient[i+8]), CultureInfo.InvariantCulture), float.Parse((collPosOrient[i+9]), CultureInfo.InvariantCulture));
                     rightHandColl.transform.GetChild(idColl).transform.eulerAngles = new Vector3(float.Parse((collPosOrient[i+10]), CultureInfo.InvariantCulture), float.Parse((collPosOrient[i+11]), CultureInfo.InvariantCulture), float.Parse((collPosOrient[i+12]), CultureInfo.InvariantCulture));
                     
-                    leftHandColl.transform.GetChild(idColl).transform.gameObject.GetComponent<CapsuleCollider>().center = new Vector3(float.Parse((collProperties[i+1]), CultureInfo.InvariantCulture), float.Parse((collProperties[i+2]), CultureInfo.InvariantCulture), float.Parse((collProperties[i+3]), CultureInfo.InvariantCulture));
-                    leftHandColl.transform.GetChild(idColl).transform.gameObject.GetComponent<CapsuleCollider>().radius = float.Parse((collProperties[i+4]), CultureInfo.InvariantCulture);
-                    leftHandColl.transform.GetChild(idColl).transform.gameObject.GetComponent<CapsuleCollider>().height = float.Parse((collProperties[i+5]), CultureInfo.InvariantCulture);
-                    leftHandColl.transform.GetChild(idColl).transform.gameObject.GetComponent<CapsuleCollider>().direction = int.Parse(collProperties[i+6]);
-
-                    rightHandColl.transform.GetChild(idColl).transform.gameObject.GetComponent<CapsuleCollider>().center = new Vector3(float.Parse((collProperties[i+7]), CultureInfo.InvariantCulture), float.Parse((collProperties[i+8]), CultureInfo.InvariantCulture), float.Parse((collProperties[i+9]), CultureInfo.InvariantCulture));
-                    rightHandColl.transform.GetChild(idColl).transform.gameObject.GetComponent<CapsuleCollider>().radius = float.Parse((collProperties[i+10]), CultureInfo.InvariantCulture);
-                    rightHandColl.transform.GetChild(idColl).transform.gameObject.GetComponent<CapsuleCollider>().height = float.Parse((collProperties[i+11]), CultureInfo.InvariantCulture);
-                    rightHandColl.transform.GetChild(idColl).transform.gameObject.GetComponent<CapsuleCollider>().direction = int.Parse(collProperties[i+12]);
+                    // leftHandColl.transform.GetChild(idColl).transform.gameObject.GetComponent<CapsuleCollider>().center = new Vector3(float.Parse((collProperties[i+1]), CultureInfo.InvariantCulture), float.Parse((collProperties[i+2]), CultureInfo.InvariantCulture), float.Parse((collProperties[i+3]), CultureInfo.InvariantCulture));
+                    // leftHandColl.transform.GetChild(idColl).transform.gameObject.GetComponent<CapsuleCollider>().radius = float.Parse((collProperties[i+4]), CultureInfo.InvariantCulture);
+                    // leftHandColl.transform.GetChild(idColl).transform.gameObject.GetComponent<CapsuleCollider>().height = float.Parse((collProperties[i+5]), CultureInfo.InvariantCulture);
+                    // leftHandColl.transform.GetChild(idColl).transform.gameObject.GetComponent<CapsuleCollider>().direction = int.Parse(collProperties[i+6]);
+// 
+                    // rightHandColl.transform.GetChild(idColl).transform.gameObject.GetComponent<CapsuleCollider>().center = new Vector3(float.Parse((collProperties[i+7]), CultureInfo.InvariantCulture), float.Parse((collProperties[i+8]), CultureInfo.InvariantCulture), float.Parse((collProperties[i+9]), CultureInfo.InvariantCulture));
+                    // rightHandColl.transform.GetChild(idColl).transform.gameObject.GetComponent<CapsuleCollider>().radius = float.Parse((collProperties[i+10]), CultureInfo.InvariantCulture);
+                    // rightHandColl.transform.GetChild(idColl).transform.gameObject.GetComponent<CapsuleCollider>().height = float.Parse((collProperties[i+11]), CultureInfo.InvariantCulture);
+                    // rightHandColl.transform.GetChild(idColl).transform.gameObject.GetComponent<CapsuleCollider>().direction = int.Parse(collProperties[i+12]);
                 }
-
-// NOW ADD OBJECTS (CAN REMOVE COLLIDERS/RB IF NEEDED )
-                
-                // target.nbTargetInScene = int.Parse(splitSentence[11]);
-                // target.targetToTouch = int.Parse(splitSentence[13]);
-
-                // for(int i = target.nbTargetInScene; i < OOI.Length; i++)
-                // {
-                //     OOI[i].gameObject.SetActive(false);
-                // }
-
-                // for(int i = 0; i < target.nbTargetInScene; i++)
-                // {
-
-                //     OOI[i].gameObject.SetActive(true);
-                //     if(i != target.targetToTouch)
-                //     {
-                //         OOI[i].toBePicked = false;
-                //     }
-                //     OOI[target.targetToTouch].toBePicked = true;
-                // }
-
-                // for(int i = 0; i <  target.nbTargetInScene; i++) // OU OOI.Length
-                // {
-                //     OOI[i].transform.position = new Vector3(float.Parse((splitSentence[2*i+15].Split(','))[0], CultureInfo.InvariantCulture), float.Parse((splitSentence[2*i+15].Split(','))[1], CultureInfo.InvariantCulture), float.Parse((splitSentence[2*i+15].Split(','))[2], CultureInfo.InvariantCulture));
-                // }
-                
 
 
             break;

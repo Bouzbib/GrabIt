@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
 public class ColorChange : MonoBehaviour
 {
 	public GameObject rightHand, leftHand;
@@ -17,6 +19,8 @@ public class ColorChange : MonoBehaviour
 	private Collider handCollidersRight, handCollidersLeft;
 	private Shader shader;
 
+	public IList<OVRBoneCapsule> Capsules { get; private set; }
+	public IList<OVRBoneCapsule> CapsulesR { get; private set; }
 
     void Start()
     {
@@ -30,12 +34,21 @@ public class ColorChange : MonoBehaviour
 		closestPointPerVertexRight = new Vector3[thisVertices.Length];	
 		closestPointPerVertexLeft = new Vector3[thisVertices.Length];
 		graspContact = false;
-			
+
+
+		Capsules = GameObject.Find("OVRCustomHandPrefab_L").GetComponent<OVRCustomSkeleton>().Capsules;
+		CapsulesR = GameObject.Find("OVRCustomHandPrefab_R").GetComponent<OVRCustomSkeleton>().Capsules;
+
     }
 
     void Update()
     {
+
     	graspContact = false;
+    	this.transform.SetParent(GameObject.Find("ObjectsOfInterest").transform);
+    	this.GetComponent<Rigidbody>().isKinematic = false;
+		this.GetComponent<Rigidbody>().useGravity = true;
+
 		// for(int i = 0; i < this.GetComponentsInChildren<Collider>().Length; i++)
 		// {
 		// 	this.GetComponentsInChildren<MeshRenderer>()[i].material.shader = shader;
@@ -45,7 +58,6 @@ public class ColorChange : MonoBehaviour
 		// 	closestPointPerVertex = new Vector3[thisVertices.Length];	
 		// }
 
-		
 		// colors = new Color[thisVertices.Length];
 		// closestPointPerVertex = new Vector3[thisVertices.Length];
 
@@ -86,13 +98,62 @@ public class ColorChange : MonoBehaviour
 				colors[k] = Color.Lerp(Color.yellow, Color.red, (1-distance));
 			}
 
-			if(distance < 0.1f)
+			if(distance < 0.01f)
 			{
 				graspContact = true;
+
+
+				// this.GetComponent<Rigidbody>().isKinematic = true;
+				this.GetComponent<Rigidbody>().useGravity = false;
+				
+				// for(int i = 0; i < Capsules.Count ; i++)
+		  //   	{
+		  //   		if(distance == distanceR)
+				// 	{
+				// 		thisVertices[k] = new Vector3(CapsulesR[i].CapsuleCollider.gameObject.transform.position.x, CapsulesR[i].CapsuleCollider.gameObject.transform.position.y, CapsulesR[i].CapsuleCollider.gameObject.transform.position.z);
+				// 	}
+				// 	else
+				// 	{
+				// 		thisVertices[k] = new Vector3(Capsules[i].CapsuleCollider.gameObject.transform.position.x, Capsules[i].CapsuleCollider.gameObject.transform.position.y, Capsules[i].CapsuleCollider.gameObject.transform.position.z);
+				// 	}
+
+				// 	thisMesh.vertices[k] = thisVertices[k];
+				// }
+
+				if(distance == distanceR)
+				{
+					this.transform.SetParent(rightHand.transform);
+					// this.GetComponent<Rigidbody>().MovePosition(rightHand.transform.position);
+					// this.GetComponent<Rigidbody>().MoveRotation(rightHand.transform.rotation);
+				}
+				else
+				{
+					this.transform.SetParent(leftHand.transform);
+				}
 			}
 
 		}
 		thisMesh.colors = colors;
+
+
+
+		// for(int i = 0; i < Capsules.Count ; i++)
+  //   	{
+
+		// 	Capsules[i].CapsuleCollider.gameObject.transform.position.x
+		// 	Capsules[i].CapsuleCollider.gameObject.transform.position.y
+		// 	Capsules[i].CapsuleCollider.gameObject.transform.position.z
+			
+		// 	Capsules[i].CapsuleCollider.gameObject.transform.eulerAngles.x
+		// 	Capsules[i].CapsuleCollider.gameObject.transform.eulerAngles.y
+		// 	Capsules[i].CapsuleCollider.gameObject.transform.eulerAngles.z
+		// 	CapsulesR[i].CapsuleCollider.gameObject.transform.position.x
+		// 	CapsulesR[i].CapsuleCollider.gameObject.transform.position.y
+		//     CapsulesR[i].CapsuleCollider.gameObject.transform.position.z
+		//     CapsulesR[i].CapsuleCollider.gameObject.transform.eulerAngles.x
+		//     CapsulesR[i].CapsuleCollider.gameObject.transform.eulerAngles.y
+		//     CapsulesR[i].CapsuleCollider.gameObject.transform.eulerAngles.z;
+		// }
     }
 
 // SHOW GIZMOOOOOOOS -> vertex between user's hands and OOI

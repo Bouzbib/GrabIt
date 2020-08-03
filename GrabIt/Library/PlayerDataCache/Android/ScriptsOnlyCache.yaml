@@ -5,6 +5,12 @@ ScriptsOnlyBuild:
     - InstantiateGameObjects
     - ONSPSettings
     - ObjectOfInterest
+    - OculusSampleFramework.FingerTipPokeTool
+    - OculusSampleFramework.FingerTipPokeToolView
+    - OculusSampleFramework.InteractableToolsCreator
+    - OculusSampleFramework.InteractableToolsInputRouter
+    - OculusSampleFramework.RayTool
+    - OculusSampleFramework.RayToolView
     - OvrAvatarSettings
     - WriteHand
     - WriteObjOfInterest
@@ -30,8 +36,16 @@ ScriptsOnlyBuild:
     - Valve.VR.SteamVR_Settings
     - Valve.VR.SteamVR_Skeleton_Pose
     - Valve.VR.SteamVR_Skeleton_Poser
+    Unity.TextMeshPro.dll:
+    - TMPro.TMP_FontAsset
+    - TMPro.TMP_Settings
+    - TMPro.TMP_SpriteAsset
+    - TMPro.TMP_StyleSheet
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
+    UnityEngine.UI.dll:
+    - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.StandaloneInputModule
     XiaomiSupport.dll:
     - AppStoresSupport.AppStoreSettings
   sceneClasses:
@@ -83,58 +97,84 @@ ScriptsOnlyBuild:
     - Class: 109
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9568}
+      Script: {instanceID: 9590}
     - Class: 114
-      Script: {instanceID: 9618}
+      Script: {instanceID: 9640}
     - Class: 114
-      Script: {instanceID: 9798}
+      Script: {instanceID: 9820}
     - Class: 114
-      Script: {instanceID: 10082}
+      Script: {instanceID: 9940}
     - Class: 114
-      Script: {instanceID: 10292}
+      Script: {instanceID: 9990}
     - Class: 114
-      Script: {instanceID: 10396}
+      Script: {instanceID: 10104}
     - Class: 114
-      Script: {instanceID: 10592}
+      Script: {instanceID: 10314}
     - Class: 114
-      Script: {instanceID: 10608}
+      Script: {instanceID: 10418}
     - Class: 114
-      Script: {instanceID: 10656}
+      Script: {instanceID: 10614}
     - Class: 114
-      Script: {instanceID: 10664}
+      Script: {instanceID: 10630}
     - Class: 114
-      Script: {instanceID: 10734}
+      Script: {instanceID: 10678}
     - Class: 114
-      Script: {instanceID: 10796}
+      Script: {instanceID: 10686}
     - Class: 114
-      Script: {instanceID: 10930}
+      Script: {instanceID: 10756}
     - Class: 114
-      Script: {instanceID: 10940}
+      Script: {instanceID: 10818}
     - Class: 114
-      Script: {instanceID: 11418}
+      Script: {instanceID: 10822}
     - Class: 114
-      Script: {instanceID: 11498}
+      Script: {instanceID: 10948}
     - Class: 114
-      Script: {instanceID: 11590}
+      Script: {instanceID: 10952}
     - Class: 114
-      Script: {instanceID: 11854}
+      Script: {instanceID: 10962}
     - Class: 114
-      Script: {instanceID: 12240}
+      Script: {instanceID: 11440}
     - Class: 114
-      Script: {instanceID: 12556}
+      Script: {instanceID: 11486}
     - Class: 114
-      Script: {instanceID: 12562}
+      Script: {instanceID: 11520}
     - Class: 114
-      Script: {instanceID: 12642}
+      Script: {instanceID: 11612}
+    - Class: 114
+      Script: {instanceID: 11614}
+    - Class: 114
+      Script: {instanceID: 11658}
+    - Class: 114
+      Script: {instanceID: 11768}
+    - Class: 114
+      Script: {instanceID: 11876}
+    - Class: 114
+      Script: {instanceID: 11964}
+    - Class: 114
+      Script: {instanceID: 11988}
+    - Class: 114
+      Script: {instanceID: 12262}
+    - Class: 114
+      Script: {instanceID: 12578}
+    - Class: 114
+      Script: {instanceID: 12584}
     - Class: 114
       Script: {instanceID: 12664}
     - Class: 114
-      Script: {instanceID: 12778}
+      Script: {instanceID: 12686}
     - Class: 114
-      Script: {instanceID: 13048}
+      Script: {instanceID: 12800}
     - Class: 114
-      Script: {instanceID: 13164}
+      Script: {instanceID: 12868}
+    - Class: 114
+      Script: {instanceID: 13070}
+    - Class: 114
+      Script: {instanceID: 13082}
+    - Class: 114
+      Script: {instanceID: 13186}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 120
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
@@ -2989,7 +3029,7 @@ ScriptsOnlyBuild:
     className: FollowTarget
   - hash:
       serializedVersion: 2
-      Hash: 7893708f40d674f477a6320abc48aa19
+      Hash: 9abd7fab25bd0f9984242c281a7902d5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: InstantiateGameObjects

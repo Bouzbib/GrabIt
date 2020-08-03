@@ -35,7 +35,7 @@ public class WriteObjOfInterest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		OOI = new GameObject[]{GameObject.Find("ObjectsOfInterest/Cylinder"), GameObject.Find("ObjectsOfInterest/Cube"), GameObject.Find("ObjectsOfInterest/Sphere"), GameObject.Find("ObjectsOfInterest/Capsule")};
+		// OOI = new GameObject[]{GameObject.Find("ObjectsOfInterest/Cylinder"), GameObject.Find("ObjectsOfInterest/Cube"), GameObject.Find("ObjectsOfInterest/Sphere"), GameObject.Find("ObjectsOfInterest/Capsule")};
 
         path = $"/mnt/sdcard/" + time1 + "-OOI.csv";
         writer = new StreamWriter(path, true);

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.IO;
 
 public class InstantiateGameObjects : MonoBehaviour
 {
@@ -23,7 +25,7 @@ public class InstantiateGameObjects : MonoBehaviour
     private int taskNumber, objId;
 
     private int nbBloc = 0;
-    public int nbBlocMax = 2;
+    public int nbBlocMax = 1;
     public int state = 0;
 
     public Material phantomMaterialRed, phantomMaterialGreen;
@@ -33,19 +35,25 @@ public class InstantiateGameObjects : MonoBehaviour
 	public GameObject Text3D;
 
 	public bool realGame;
+	public GameObject resetButton, nextButton;
+	private GameObject[] hands;
+
+	private Vector3 previousAngles;
+
+	private int nbTouch = 0;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-    	posOrigin = new Vector3(-0.05f, -0.54f, 0.335f);
+    	posOrigin = new Vector3(-0.05f, -0.50f, 0.335f);
     	
     	tasks = new string[]{"Hold", "Push", "Pull", "Move Over", "Raise", "Push Down", "Fit", "Roll"};
-    	//0:Hold, 1:Push: 2:Pull: 3:MoveOver; 4:Raise; 5:PsuhDown; 6:Fit; 7:Roll 
-    	objectTypes = new GameObject[]{GameObject.Find("ObjectsOfInterest/Cylinder"), GameObject.Find("ObjectsOfInterest/Cylinder90"), GameObject.Find("ObjectsOfInterest/Sphere"), GameObject.Find("ObjectsOfInterest/Capsule")};//, GameObject.Find("ObjectsOfInterest/Cylinder90")}; // j
+    	//0:Hold, 1:Push: 2:Pull: 3:MoveOver; 4:Raise; 5:PushDown; 6:Fit; 7:Roll 
+    	objectTypes = new GameObject[]{GameObject.Find("ObjectsOfInterest/Cylinder"), GameObject.Find("ObjectsOfInterest/Cube"), GameObject.Find("ObjectsOfInterest/Sphere")};//, GameObject.Find("ObjectsOfInterest/Capsule")};//, GameObject.Find("ObjectsOfInterest/Cylinder90")}; // j
     	//0:Cylinder, 1:Cube, 2:Sphere, 3:Capsule //, 4:LyingCylinder
-		phantomObject = new GameObject[]{GameObject.Find("PhantomObjects/Cylinder"), GameObject.Find("PhantomObjects/Cylinder90"), GameObject.Find("PhantomObjects/Sphere"), GameObject.Find("PhantomObjects/Capsule")};//, GameObject.Find("ObjectsOfInterest/Cylinder90")};
+		phantomObject = new GameObject[]{GameObject.Find("PhantomObjects/Cylinder"), GameObject.Find("PhantomObjects/Cube"), GameObject.Find("PhantomObjects/Sphere")};//, GameObject.Find("PhantomObjects/Capsule")};//, GameObject.Find("ObjectsOfInterest/Cylinder90")};
 
 
     	for(int i = 0; i < objectTypes.Length; i++)
@@ -55,20 +63,21 @@ public class InstantiateGameObjects : MonoBehaviour
 	    	// 0: cylinder; 1: cube; 2: sphere; 3: capsule
     	}
 
-    	scales = new Vector3[4];
+    	// scales = new Vector3[4];
+    	scales = new Vector3[2];
     	scales[0] = new Vector3(0.1f, 0.1f, 0.1f);
     	scales[1] = new Vector3(0.13f, 0.13f, 0.13f);
-    	scales[2] = new Vector3(0.2f, 0.2f, 0.2f);
-    	scales[3] = new Vector3(0.3f, 0.3f, 0.3f);
+    	// scales[2] = new Vector3(0.2f, 0.2f, 0.2f);
+    	// scales[3] = new Vector3(0.3f, 0.3f, 0.3f);
 
 		posPhantoms = new Vector3[tasks.Length];
     	posPhantoms[0] = new Vector3(posOrigin.x, posOrigin.y, posOrigin.z);
-    	posPhantoms[1] = new Vector3(posOrigin.x, posOrigin.y, posOrigin.z + 0.4f);
-    	posPhantoms[2] = new Vector3(posOrigin.x, posOrigin.y, posOrigin.z - 0.4f);
-    	posPhantoms[3] = new Vector3(posOrigin.x + 0.8f, posOrigin.y, posOrigin.z - 0.5f);
-		posPhantoms[4] = new Vector3(posOrigin.x, posOrigin.y + 0.8f, posOrigin.z);
-		posPhantoms[5] = new Vector3(posOrigin.x, posOrigin.y - 0.05f, posOrigin.z);
-		posPhantoms[6] = new Vector3(posOrigin.x - 0.8f, posOrigin.y, posOrigin.z + 0.5f);
+    	posPhantoms[1] = new Vector3(posOrigin.x, posOrigin.y, posOrigin.z + 0.2f);
+    	posPhantoms[2] = new Vector3(posOrigin.x, posOrigin.y, posOrigin.z - 0.2f);
+    	posPhantoms[3] = new Vector3(posOrigin.x + 0.6f, posOrigin.y, posOrigin.z - 0.15f);
+		posPhantoms[4] = new Vector3(posOrigin.x, posOrigin.y + 0.5f, posOrigin.z);
+		posPhantoms[5] = new Vector3(posOrigin.x, posOrigin.y - 0.1f, posOrigin.z);
+		posPhantoms[6] = new Vector3(posOrigin.x - 0.6f, posOrigin.y, posOrigin.z + 0.35f);
 		posPhantoms[7] = new Vector3(posOrigin.x + 0.8f, posOrigin.y, posOrigin.z);
 
 		configException = new List<int>();
@@ -84,9 +93,12 @@ public class InstantiateGameObjects : MonoBehaviour
 	    	otherwalls[i].transform.position = walls[i].gameObject.transform.position;
 	    	otherwalls[i].transform.eulerAngles = new Vector3(walls[i].gameObject.transform.eulerAngles.x, walls[i].gameObject.transform.eulerAngles.y - 90f, walls[i].gameObject.transform.eulerAngles.z);
 
-	    	otherwalls[i].characterSize = 0.03f;
+	    	otherwalls[i].characterSize = 0.02f;
     	}
 
+    	resetButton = GameObject.Find("ResetButton");
+    	nextButton = GameObject.Find("NextButton");
+    	hands = new GameObject[]{GameObject.Find("OVRCustomHandPrefab_L"), GameObject.Find("OVRCustomHandPrefab_R")};
 
     }
 
@@ -111,10 +123,45 @@ public class InstantiateGameObjects : MonoBehaviour
 				scaleObj = scales[k];
 			}
 		}
+
+
+    	// if scale = 3, posOrig = ...
+    	// if scale = 2, posOrig = ...
+    	// if scale = 1, posOrig = ...
+    	// if scale = 0, posOrig = ...
+		// objectTypes[objId].GetComponent<Rigidbody>().useGravity = false;
+    	// objectTypes[objId].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+    	//RigidbodyConstraints.FreezeAll;
+
+    	//0:Hold, 1:Push: 2:Pull: 3:MoveOver; 4:Raise; 5:PsuhDown; 6:Fit; 7:Roll 
+		if(taskNumber == 0) // All
+		{
+			objectTypes[objId].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+			// objectTypes[objId].GetComponent<Rigidbody>().useGravity = true;
+		}
+		if(taskNumber == 1 || taskNumber == 2)//Push/Pull -> FreeZ
+		{
+			objectTypes[objId].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+		}
+		if(taskNumber == 3 || taskNumber == 6) // None
+		{
+			objectTypes[objId].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+		}
+		if(taskNumber == 4 || taskNumber == 5)//Raise/PushDown -> FreeY
+		{
+			objectTypes[objId].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+		}
+		if(taskNumber == 7) // FreeX | RotZ | RotY
+		{
+			objectTypes[objId].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX;// | RigidbodyConstraints.FreezeRotationY;
+		}
+
+    	
+
 		if(realGame)
 		{
 			objectTypes[objId].GetComponent<ColorChange>().graspContact = false;
-			if(objectTypes[objId].GetComponent<ColorChange>().distance < 0.1f)
+			if(objectTypes[objId].GetComponent<ColorChange>().distance < 0.08f)
 			{
 				objectTypes[objId].GetComponent<ColorChange>().graspContact = true;
 			}
@@ -126,6 +173,29 @@ public class InstantiateGameObjects : MonoBehaviour
 
 		switch(state)
 		{
+			case -2:
+				StartCoroutine(CollisionWait());
+		    	if(nbTouch >= tasks.Length*objectTypes.Length*scales.Length)
+				{
+					nbBloc = nbBloc + 1;
+					if(nbBloc >= nbBlocMax)
+					{
+						state = 2;
+					}
+					else
+					{
+						configException.Clear();
+						configException = new List<int>();
+						state = -1;
+					}
+				}
+				else
+				{
+					nbTouch = nbTouch + 1;
+					state = -1;
+				}
+		break;
+		
 			case -1:
 				config = Random.Range(0, tasks.Length*objectTypes.Length*scales.Length);
 				while(configException.Contains(config))
@@ -152,8 +222,7 @@ public class InstantiateGameObjects : MonoBehaviour
                 objectTypes[objId].GetComponent<ObjectOfInterest>().collision = false;
                 objectTypes[objId].GetComponent<ObjectOfInterest>().toBePicked = true;
                 objectTypes[objId].transform.localScale = new Vector3(scaleObj.x, scaleObj.y, scaleObj.z);
-
-                // phantomObject = (GameObject) Instantiate(objectTypes[objId], objToCatch.transform);
+                objectTypes[objId].transform.eulerAngles = new Vector3(0f, 0f, 0f);
                 phantomObject[objId].SetActive(true);
                 phantomObject[objId].transform.position = new Vector3(posPhantoms[taskNumber].x, posPhantoms[taskNumber].y, posPhantoms[taskNumber].z);
                 phantomObject[objId].transform.localScale = new Vector3(scaleObj.x, scaleObj.y, scaleObj.z);
@@ -161,33 +230,63 @@ public class InstantiateGameObjects : MonoBehaviour
                 //Vector3(posPhantoms[taskNumber].position.x, posPhantoms[taskNumber].position.y, posPhantoms[taskNumber].position.z);
                 phantomObject[objId].GetComponent<MeshRenderer>().material = phantomMaterialRed;
                 phantomObject[objId].GetComponent<Collider>().enabled = false;
+                previousAngles = new Vector3(objectTypes[objId].transform.eulerAngles.x, objectTypes[objId].transform.eulerAngles.y, objectTypes[objId].transform.eulerAngles.z);
                 state = 1;
 			break;
 
 			case 1:
 				StartCoroutine(Consignes());
-				Debug.Log("State = 1");
+				// Debug.Log("State = 1");
+				resetButton.GetComponent<MeshRenderer>().material.color = Color.yellow;
+				for(int i = 0; i < hands.Length; i++)
+				{
+					if((Mathf.Abs(hands[i].transform.position.x - resetButton.transform.position.x) < 0.07f) && (Mathf.Abs(hands[i].transform.position.y - resetButton.transform.position.y) < 0.07f) && (Mathf.Abs(hands[i].transform.position.z - resetButton.transform.position.z) < 0.07f))
+					{
+						resetButton.GetComponent<MeshRenderer>().material.color = Color.green;
+						objectTypes[objId].transform.position = new Vector3(posOrigin.x, posOrigin.y, posOrigin.z);
+						objectTypes[objId].transform.eulerAngles = new Vector3(previousAngles.x, previousAngles.y, previousAngles.z);
+					}
+				}
+
+				nextButton.GetComponent<MeshRenderer>().material.color = Color.yellow;
+				for(int i = 0; i < hands.Length; i++)
+				{
+					if((Mathf.Abs(hands[i].transform.position.x - nextButton.transform.position.x) < 0.07f) && (Mathf.Abs(hands[i].transform.position.y - nextButton.transform.position.y) < 0.07f) && (Mathf.Abs(hands[i].transform.position.z - nextButton.transform.position.z) < 0.07f))
+					{
+						nextButton.GetComponent<MeshRenderer>().material.color = Color.green;
+						StartCoroutine(WaitForNext());
+					}
+				}
+
+				if(Input.GetKeyDown(KeyCode.Space))
+				{
+					StartCoroutine(WaitForNext());
+				}
+				
+
+				phantomObject[objId].GetComponent<MeshRenderer>().material = phantomMaterialRed;
 				if((Mathf.Abs(objectTypes[objId].transform.position.x - phantomObject[objId].transform.position.x) < 0.07f) && (Mathf.Abs(objectTypes[objId].transform.position.y - phantomObject[objId].transform.position.y) < 0.07f) && (Mathf.Abs(objectTypes[objId].transform.position.z - phantomObject[objId].transform.position.z) < 0.07f))
 				{
 					phantomObject[objId].GetComponent<MeshRenderer>().material = phantomMaterialGreen;
-					if(objectTypes[objId].GetComponent<ColorChange>().graspContact && (Mathf.Abs(objectTypes[objId].transform.position.x - phantomObject[objId].transform.position.x) < 0.05f) && (Mathf.Abs(objectTypes[objId].transform.position.y - phantomObject[objId].transform.position.y) < 0.05f) && (Mathf.Abs(objectTypes[objId].transform.position.z - phantomObject[objId].transform.position.z) < 0.05f))
+					if(objectTypes[objId].GetComponent<ColorChange>().graspContact)// && (Mathf.Abs(objectTypes[objId].transform.position.x - phantomObject[objId].transform.position.x) < 0.05f) && (Mathf.Abs(objectTypes[objId].transform.position.y - phantomObject[objId].transform.position.y) < 0.05f) && (Mathf.Abs(objectTypes[objId].transform.position.z - phantomObject[objId].transform.position.z) < 0.05f))
 					{
 						objectTypes[objId].GetComponent<ObjectOfInterest>().collision = true;
-
-						if(configException.Count == tasks.Length*objectTypes.Length*scales.Length)
+						StartCoroutine(CollisionWait()); //NEW
+						if(nbTouch == tasks.Length*objectTypes.Length*scales.Length)
 						{
 							nbBloc = nbBloc + 1;
-							configException.Clear();
-							configException = new List<int>();
 							if(nbBloc >= nbBlocMax)
 							{
 								state = 2;
 							}
 							else
 							{
+								configException.Clear();
+								configException = new List<int>();
 								state = -1;
 							}
 						}
+						nbTouch = nbTouch + 1;
 						state = -1;
 					}
 				}
@@ -197,10 +296,13 @@ public class InstantiateGameObjects : MonoBehaviour
 			case 2:
 				StartCoroutine(EndOfTheGame());
 			break;
+
+			case 3:
+				Debug.Log("Just waiting for Coroutine to end...");
+				Debug.Log("NbTouch: " + nbTouch + "; ConfigCount: " + configException.Count);
+			break;
 		}
 
-
-		// CONSTRAIN ON TASKS?
 		// ADD CYLINDER 90DEGRES?
     }
 
@@ -216,13 +318,31 @@ public class InstantiateGameObjects : MonoBehaviour
 
     IEnumerator CollisionWait()
     {
+    	for (int i = 2; i < otherwalls.Length; i++)
+    	{
+	    	otherwalls[i].text = "";
+    	}
 		objectTypes[objId].GetComponent<Renderer>().enabled = false;
-		phantomObject[objId].GetComponent<Renderer>().enabled = false;
-
+		phantomObject[objId].GetComponent<Renderer>().enabled = false;		
         yield return new WaitForSeconds(1);
 		objectTypes[objId].GetComponent<Renderer>().enabled = true;
 		phantomObject[objId].GetComponent<Renderer>().enabled = true;
 		objectTypes[objId].GetComponent<ObjectOfInterest>().collision = false;
+    }
+
+    IEnumerator WaitForNext()
+    {
+    	state = 3;
+    	objectTypes[objId].GetComponent<Renderer>().enabled = false;
+		phantomObject[objId].GetComponent<Renderer>().enabled = false;
+		for (int i = 2; i < otherwalls.Length; i++)
+    	{
+	    	otherwalls[i].text = "";
+    	}
+
+    	yield return new WaitForSeconds(2);
+
+    	state = -2;
     }
 
     IEnumerator EndOfTheGame()
@@ -232,10 +352,20 @@ public class InstantiateGameObjects : MonoBehaviour
 	    	objectTypes[i].SetActive(false);
 	    	phantomObject[i].SetActive(false);
     	}
+    	for (int i = 2; i < otherwalls.Length; i++)
+    	{
+	    	otherwalls[i].text = "The Game is Over. Thank you!";
+    	}
 
-    	Debug.Log("The Game is Over. Thank you!");
+    	Debug.Log("Fin du Game!");
     	yield return new WaitForSeconds(5);
-        Debug.Break();
-    	Application.Quit();
+    	if(realGame)
+    	{
+	    	Application.Quit();
+    	}
+    	// else
+    	// {
+	    // 	Debug.Break();
+    	// }
     }
 }
